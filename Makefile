@@ -9,7 +9,7 @@ all: vim-plug /usr/bin/fish ts-lsp
 ts-lsp: nodejs
 	sudo npm i --location=global typescript diagnostic-languageserver typescript-language-server
 
-/usr/bin/fish: upgraded-apt-get ${HOME}/.config /usr/bin/apt-add-repository tzdata
+/usr/bin/fish: upgraded-apt ${HOME}/.config /usr/bin/apt-add-repository tzdata
 	sudo sh -c ' sudo apt-add-repository -y ppa:fish-shell/release-3 \
 	  && sudo $(UPDATE) \
 	  && sudo $(INSTALL) fish \
@@ -23,7 +23,7 @@ vim-plug: /usr/bin/nvim /usr/bin/curl /usr/bin/git build-essential
 	  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' \
 	  && nvim --headless +'PlugInstall --sync' +qall
 
-/usr/bin/nvim: upgraded-apt-get ${HOME}/.config /usr/bin/apt-add-repository
+/usr/bin/nvim: upgraded-apt ${HOME}/.config /usr/bin/apt-add-repository
 	sudo sh -c 'add-apt-repository -y ppa:neovim-ppa/unstable \
 	  && $(UPDATE) \
 	  && $(INSTALL) neovim'
@@ -36,7 +36,7 @@ vim-plug: /usr/bin/nvim /usr/bin/curl /usr/bin/git build-essential
 tzdata: upgraded-apt
 	sudo DEBIAN_FRONTEND=noninteractive $(INSTALL) --no-install-recommends tzdata
 
-/usr/bin/git: upgraded-apt-get tzdata /usr/bin/apt-add-repository
+/usr/bin/git: upgraded-apt tzdata /usr/bin/apt-add-repository
 	sudo sh -c 'add-apt-repository -y ppa:git-core/ppa \
 	  && $(UPDATE) \
 	  && $(INSTALL) git'
