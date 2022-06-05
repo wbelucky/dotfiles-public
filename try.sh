@@ -1,2 +1,2 @@
-#!/bin/sh
-docker run -it --rm -v `pwd`/$1:/workspace -v `dirname $0`:/home/user/dotfiles ghcr.io/wbelucky/dotfiles-public
+#!/bin/bash
+docker run -it --rm -v `pwd`/$1:/workspace -v $(cd $(dirname $0); pwd):/home/user/dotfiles ghcr.io/wbelucky/dotfiles-public
